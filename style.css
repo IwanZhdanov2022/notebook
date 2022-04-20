@@ -1,0 +1,15 @@
+.form-row {
+  display: flex;
+}
+.form-variable {
+  flex: 1 1 30%;
+  padding: 5px;
+  text-align: right;
+}
+.form-value {
+  flex: 1 1 70%;
+  padding: 5px;
+}
+form input {
+  width: 100%;
+}

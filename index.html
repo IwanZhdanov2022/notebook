@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Записная книжка</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="result"></div>
+
+  <!--
+  <button type="button" id="add-note">Добавить запись</button>
+  <button type="button" id="get-notes">Получить список записей</button>
+  -->
+
+  <form id="add-form" onsubmit="addNote(getData(this)); return false;">
+    <div class="form-row">
+      <div class="form-variable">ID:</div>
+      <div class="form-value"><input type="text" name="id"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-variable">Тескт записи:</div>
+      <div class="form-value"><input type="text" name="txt"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-variable"></div>
+      <div class="form-value"><button type="submit">Добавить</button></div>
+    </div>
+  </form>
+
+  <script src="notebook.js"></script>
+  <script src="test.js"></script>
+</body>
+</html>
