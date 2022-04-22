@@ -14,10 +14,7 @@
         <div class="win-head">Запись</div>
         <div class="win-body">
           <form id="add-form" onsubmit="addNote(getData(this)); return false;">
-            <div class="form-row">
-              <div class="form-variable">ID:</div>
-              <div class="form-value"><input type="text" name="id"></div>
-            </div>
+            <input type="hidden" name="id">
             <div class="form-row">
               <div class="form-variable">Текст записи:</div>
               <div class="form-value"><input type="text" name="txt"></div>
@@ -42,7 +39,7 @@
       </div>
     </div>
     <div>
-      <div class="win win-red" id="alarm-window">
+      <div class="win win-red hidden" id="alarm-window">
         <div class="win-head">Напоминание</div>
         <div class="win-body">
           <div id="alarm"></div>
