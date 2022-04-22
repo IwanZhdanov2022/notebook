@@ -4,9 +4,18 @@ function rand (a, b) {
 
 var noteList = [];
 var resultElement = '#result';
+var alarmElement = '#alarm';
 function showNotes () {
-  var html = getNotesAsHtml();
+  var html;
+  html = getNotesAsHtml();
   document.querySelector(resultElement).innerHTML = html;
+  html = getNotesAsHtml(function (a) {
+    if (!a.alarm) return false;
+    var D = new Date();
+    var tm = Math.floor(D.getTime() / 1000);
+    return a.alarm <= tm;
+  });
+  document.querySelector(alarmElement).innerHTML = html;
 }
 
 function find (id) {
@@ -16,16 +25,19 @@ function find (id) {
   }
   return -1;
 }
-function getNotesAsHtml () {
+function getNotesAsHtml (callback) {
   var html = '';
   var a, caption;
   html += '<div class="note-list">';
   for (a=0; a<noteList.length; a++) {
-    html += '<div class="note">';
-    caption = noteList[a].txt;
-    if (!caption) caption = 'без названия';
-    html += '<a href="javascript:" onclick="startEditNote('+noteList[a].id+')">'+caption+'</a>';
-    html += '</div>';
+    if (!callback || callback(noteList[a])) {
+      html += '<div class="note">';
+      caption = noteList[a].txt;
+      if (!caption) caption = 'без названия';
+      html += decodeTime(noteList[a].alarm) + ' ';
+      html += '<a href="javascript:" onclick="startEditNote('+noteList[a].id+')">'+caption+'</a>';
+      html += '</div>';
+    }
   }
   html += '</div>';
   return html;
@@ -37,6 +49,15 @@ function addNote (ob) {
   if (a == -1) noteList.push(ob);
   else noteList[a] = ob;
   startEditNote(ob.id);
+  noteList.sort(function (a, b) {
+    if (a.alarm && !b.alarm) return -1;
+    if (!a.alarm && b.alarm) return 1;
+    if (a.alarm < b.alarm) return -1;
+    if (a.alarm > b.alarm) return 1;
+    if (a.txt < b.txt) return -1;
+    if (a.txt > b.txt) return 1;
+    return 0;
+  });
   final();
 }
 function startEditNote (id) {

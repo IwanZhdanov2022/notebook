@@ -19,6 +19,7 @@ function encodeTime (str) {
   D.setDate(B[2]);
   D.setHours(B[3]);
   D.setMinutes(B[4]);
+  D.setSeconds(0);
   return Math.floor(D.getTime() / 1000);
 }
 
