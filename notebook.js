@@ -5,6 +5,7 @@ function rand (a, b) {
 var noteList = [];
 var resultElement = '#result';
 var alarmElement = '#alarm';
+var alarmWindow = '#alarm-window';
 var remainTimer = 0;
 function calcAlarmRemainTime () {
   clearTimeout(remainTimer);
@@ -30,6 +31,11 @@ function showNotesInAlarm () {
     return a.alarm <= tm;
   });
   document.querySelector(alarmElement).innerHTML = html;
+  if (html) {
+    document.querySelector(alarmWindow).classList.remove('hidden');
+  } else {
+    document.querySelector(alarmWindow).classList.add('hidden');
+  }
   calcAlarmRemainTime();
 }
 function showNotes () {
@@ -48,10 +54,11 @@ function find (id) {
 }
 function getNotesAsHtml (callback) {
   var html = '';
-  var a, caption;
+  var a, caption, is_something = false;
   html += '<div class="note-list">';
   for (a=0; a<noteList.length; a++) {
     if (!callback || callback(noteList[a])) {
+      is_something = true;
       html += '<div class="note">';
       caption = noteList[a].txt;
       if (!caption) caption = 'без названия';
@@ -61,6 +68,7 @@ function getNotesAsHtml (callback) {
     }
   }
   html += '</div>';
+  if (!is_something) return '';
   return html;
 }
 function addNote (ob) {
