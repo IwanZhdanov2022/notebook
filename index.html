@@ -8,29 +8,51 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="result"></div>
-
-  <!--
-  <button type="button" id="add-note">Добавить запись</button>
-  <button type="button" id="get-notes">Получить список записей</button>
-  -->
-
-  <form id="add-form" onsubmit="addNote(getData(this)); return false;">
-    <div class="form-row">
-      <div class="form-variable">ID:</div>
-      <div class="form-value"><input type="text" name="id"></div>
+  <div class="row">
+    <div>
+      <div class="win">
+        <div class="win-head">Запись</div>
+        <div class="win-body">
+          <form id="add-form" onsubmit="addNote(getData(this)); return false;">
+            <div class="form-row">
+              <div class="form-variable">ID:</div>
+              <div class="form-value"><input type="text" name="id"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-variable">Текст записи:</div>
+              <div class="form-value"><input type="text" name="txt"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-variable">Описание:</div>
+              <div class="form-value"><textarea name="descr"></textarea></div>
+            </div>
+            <div class="form-row">
+              <div class="form-variable">Напомнить:</div>
+              <div class="form-value"><input type="text" name="alarm"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-variable"></div>
+              <div class="form-value">
+                <button type="submit">Сохранить</button>
+                <button type="button" onclick="delNote(getData(this).id)">Удалить</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="form-row">
-      <div class="form-variable">Тескт записи:</div>
-      <div class="form-value"><input type="text" name="txt"></div>
+    <div>
+      <div class="win">
+        <div class="win-head">Все записи</div>
+        <div class="win-body">
+          <div id="result"></div>
+        </div>
+      </div>
     </div>
-    <div class="form-row">
-      <div class="form-variable"></div>
-      <div class="form-value"><button type="submit">Добавить</button></div>
-    </div>
-  </form>
+  </div>
 
   <script src="notebook.js"></script>
+  <script src="sync.js"></script>
   <script src="test.js"></script>
 </body>
 </html>

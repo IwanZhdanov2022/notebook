@@ -1,3 +1,26 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-family: monospace;
+  font-size: 16px;
+  height: 100%;
+}
+
+.win {
+  margin: 10px 5px;
+  border: 1px blue solid;
+}
+.win-head {
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+  padding: 5px 15px;
+}
+.win-body {
+  padding: 5px 15px;
+}
+
 .form-row {
   display: flex;
 }
@@ -12,4 +35,15 @@
 }
 form input {
   width: 100%;
+}
+form textarea {
+  width: 100%;
+  height: 150px;
+}
+
+.row {
+  display: flex;
+}
+.row > div {
+  flex: 1 1 50%;
 }
