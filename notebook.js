@@ -5,10 +5,24 @@ function rand (a, b) {
 var noteList = [];
 var resultElement = '#result';
 var alarmElement = '#alarm';
-function showNotes () {
+var remainTimer = 0;
+function calcAlarmRemainTime () {
+  clearTimeout(remainTimer);
+  var D = new Date();
+  var tm = Math.floor(D.getTime() / 1000);
+  var a, remain = -1;
+  for (a=0; a<noteList.length; a++) {
+    if (noteList[a].alarm && noteList[a].alarm > tm) {
+      remain = noteList[a].alarm - tm;
+      break;
+    }
+  }
+  if (remain != -1) {
+    remainTimer = setTimeout(showNotesInAlarm, remain*1000);
+  }
+}
+function showNotesInAlarm () {
   var html;
-  html = getNotesAsHtml();
-  document.querySelector(resultElement).innerHTML = html;
   html = getNotesAsHtml(function (a) {
     if (!a.alarm) return false;
     var D = new Date();
@@ -16,6 +30,13 @@ function showNotes () {
     return a.alarm <= tm;
   });
   document.querySelector(alarmElement).innerHTML = html;
+  calcAlarmRemainTime();
+}
+function showNotes () {
+  var html;
+  html = getNotesAsHtml();
+  document.querySelector(resultElement).innerHTML = html;
+  showNotesInAlarm();
 }
 
 function find (id) {
